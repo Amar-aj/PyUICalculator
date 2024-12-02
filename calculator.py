@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         font.setPointSize(26)
         self.cButton.setFont(font)
         self.cButton.setObjectName("cButton")
-        self.aerrowButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.press_it("<<"))
+        self.aerrowButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.remove_it())
         self.aerrowButton.setGeometry(QtCore.QRect(180, 110, 75, 75))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -125,13 +125,13 @@ class Ui_MainWindow(object):
         font.setPointSize(26)
         self.plusminusButton.setFont(font)
         self.plusminusButton.setObjectName("plusminusButton")
-        self.equalButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.press_it("="))
+        self.equalButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.math_it())
         self.equalButton.setGeometry(QtCore.QRect(270, 470, 75, 75))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.equalButton.setFont(font)
         self.equalButton.setObjectName("equalButton")
-        self.desimalButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.press_it("."))
+        self.desimalButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.dot_button())
         self.desimalButton.setGeometry(QtCore.QRect(180, 470, 75, 75))
         font = QtGui.QFont()
         font.setPointSize(26)
@@ -144,6 +144,27 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+    
+    #calculate 
+    def math_it(self):
+        screen = self.OutputLabel.text()
+        answer = eval(screen)
+        self.OutputLabel.setText(str(answer))
+
+    # LOGIC FOR REMOVE CHARACTER 
+    def remove_it(self):
+        screen = self.OutputLabel.text()
+        screen = screen[:-1]
+        self.OutputLabel.setText(screen)
+
+
+    # LOGIC FOR ADD DECIMAL 
+    def dot_button(self):
+        screen = self.OutputLabel.text()
+        if screen[-1] == ".":
+            pass
+        else:
+            self.OutputLabel.setText(f' {screen}.')
     
     def press_it(self, pressed):
         if pressed == "C":
